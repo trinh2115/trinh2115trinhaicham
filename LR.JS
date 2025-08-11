@@ -36,26 +36,44 @@ const getPasswordStrength = (password) => {
 };
 
 // Storage functions 
-const saveToStorage = (key, data) => {
+const isStorageAvailable = (type = 'sessionStorage') => {
     try {
-        // If you want to replace it with localStorage, you can edit it as follows:
-        // localStorage.setItem(key, JSON.stringify(data));
+        const storage = window[type];
+        const testKey = '__test__';
+        storage.setItem(testKey, testKey);
+        storage.removeItem(testKey);
+        return true;
+    } catch (e) {
+        return false;
+    }
+};
+
+const saveToStorage = (key, data) => {
+    if (!isStorageAvailable()) {
+        showAlert('Lỗi', 'Trình duyệt của bạn không hỗ trợ lưu trữ phiên. Vui lòng tắt chế độ ẩn danh hoặc thử trình duyệt khác.', 'danger');
+        return false;
+    }
+    try {
         sessionStorage.setItem(key, JSON.stringify(data));
         return true;
     } catch (error) {
         console.error('Storage error:', error);
+        showAlert('Lỗi', 'Không thể lưu dữ liệu. Vui lòng kiểm tra cài đặt trình duyệt.', 'danger');
         return false;
     }
 };
 
 const getFromStorage = (key) => {
+    if (!isStorageAvailable()) {
+        showAlert('Lỗi', 'Trình duyệt của bạn không hỗ trợ lưu trữ phiên. Vui lòng tắt chế độ ẩn danh hoặc thử trình duyệt khác.', 'danger');
+        return null;
+    }
     try {
-        // If you want to replace it with localStorage, you can edit it as follows:
-        // const data = localStorage.getItem(key);
         const data = sessionStorage.getItem(key);
         return data ? JSON.parse(data) : null;
     } catch (error) {
         console.error('Storage error:', error);
+        showAlert('Lỗi', 'Không thể đọc dữ liệu. Vui lòng kiểm tra cài đặt trình duyệt.', 'danger');
         return null;
     }
 };
@@ -525,11 +543,8 @@ const setupRealTimeValidation = () => {
 
 // Check if user is already logged in
 const checkAuthStatus = () => {
-    const currentUser = getFromStorage('currentUser');
-    if (currentUser && (window.location.pathname.includes('login.html') || window.location.pathname.includes('register.html'))) {
-        // User is already logged in, redirect to home
-        window.location.href = 'homePage.html';
-    }
+    // Không tự động chuyển hướng về homePage.html nếu đã đăng nhập
+    // Cho phép truy cập login.html và register.html tự do
 };
 
 // Initialize when DOM is loaded

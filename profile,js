@@ -126,7 +126,13 @@ const loadUserInfo = () => {
     try {
         currentUser = getFromStorage('currentUser');
         if (!currentUser) {
-            window.location.href = 'login.html';
+            // Không redirect khi không đăng nhập, chỉ ẩn/khóa các chức năng cần thiết
+            // Có thể hiển thị thông tin mặc định hoặc ẩn các tab cá nhân
+            // Ví dụ:
+            const userName = document.getElementById('userName');
+            if (userName) userName.textContent = 'Khách';
+            // Ẩn/disable các tab, form, nút nếu cần
+            // ...
             return;
         }
         
@@ -166,7 +172,7 @@ const loadUserInfo = () => {
         
     } catch (error) {
         console.error('Load user info error:', error);
-        window.location.href = 'login.html';
+        // Không redirect khi không đăng nhập
     }
 };
 

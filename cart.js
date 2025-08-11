@@ -75,15 +75,14 @@ const loadUserInfo = () => {
     try {
         currentUser = getFromStorage('currentUser');
         const userName = document.getElementById('userName');
-        
         if (currentUser && userName) {
             userName.textContent = currentUser.firstName || currentUser.username;
-        } else if (!currentUser) {
-            window.location.href = 'login.html';
+        } else if (userName) {
+            userName.textContent = 'Khách';
         }
     } catch (error) {
         console.error('Load user info error:', error);
-        window.location.href = 'login.html';
+        // Không redirect khi không đăng nhập
     }
 };
 

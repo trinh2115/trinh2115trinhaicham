@@ -29,3 +29,20 @@ if (btnRemoveAvatar && profileAvatar) {
         if (avatarInput) avatarInput.value = '';
     });
 }
+
+// Load user info
+const loadUserInfo = () => {
+    try {
+        currentUser = getFromStorage('currentUser');
+        const userName = document.getElementById('userName');
+        if (currentUser && userName) {
+            userName.textContent = currentUser.firstName || currentUser.username;
+        } else if (userName) {
+            userName.textContent = 'Khách';
+        }
+    } catch (error) {
+        console.error('Load user info error:', error);
+    }
+};
+
+loadUserInfo();

@@ -103,8 +103,8 @@ const loadUserInfo = () => {
         
         if (currentUser && userName) {
             userName.textContent = currentUser.firstName || currentUser.username;
-        } else if (!currentUser) {
-            window.location.href = 'login.html';
+        } else if (userName) {
+            userName.textContent = 'Khách';
         }
         
         // Update cart badge
@@ -127,7 +127,7 @@ const loadUserInfo = () => {
         
     } catch (error) {
         console.error('Load user info error:', error);
-        // Don't redirect to login for contact page - allow guest access
+        // Không redirect khi không đăng nhập
     }
 };
 
