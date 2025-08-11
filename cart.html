@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng - Trình là gì shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="cart.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="homePage.html">
+                <i class="fas fa-shopping-bag me-2"></i>
+                Trình là gì shop
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homePage.html">
+                            <i class="fas fa-home me-1"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="shopLink">
+                            <i class="fas fa-store me-1"></i>Shop
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i>Liên hệ
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>
+                            Giỏ hàng
+                            <span class="badge bg-danger ms-1" id="cartBadge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="userName">Khách</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user-cog me-2"></i>Hồ sơ</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Lịch sử mua hàng</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Content -->
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2><i class="fas fa-shopping-cart me-2"></i>Giỏ hàng của bạn</h2>
+                    <button class="btn btn-outline-danger" id="clearCartBtn">
+                        <i class="fas fa-trash me-2"></i>Xóa tất cả
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+                <div class="cart-items" id="cartItemsContainer">
+                    <!-- Cart items will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Cart Summary -->
+            <div class="col-lg-4">
+                <div class="cart-summary">
+                    <h4 class="mb-4">Tổng kết đơn hàng</h4>
+                    
+                    <div class="summary-row">
+                        <span>Tạm tính:</span>
+                        <span id="subtotal">0đ</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Phí vận chuyển:</span>
+                        <span id="shippingFee">30,000đ</span>
+                    </div>
+                    
+                    <div class="summary-row">
+                        <span>Giảm giá:</span>
+                        <span id="discount" class="text-success">-0đ</span>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="summary-row total-row">
+                        <span><strong>Tổng cộng:</strong></span>
+                        <span><strong id="total">0đ</strong></span>
+                    </div>
+                    
+                    <!-- Discount Code -->
+                    <div class="discount-section mt-4">
+                        <h6>Mã giảm giá</h6>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="discountCode" placeholder="Nhập mã giảm giá">
+                            <button class="btn btn-outline-secondary" id="applyDiscountBtn">Áp dụng</button>
+                        </div>
+                        <div class="invalid-feedback" id="discountFeedback"></div>
+                    </div>
+                    
+                    <!-- Checkout Button -->
+                    <button class="btn btn-primary btn-lg w-100 mt-4" id="checkoutBtn">
+                        <i class="fas fa-credit-card me-2"></i>Thanh toán
+                    </button>
+                    
+                    <!-- Continue Shopping -->
+                    <a href="homePage.html" class="btn btn-outline-primary w-100 mt-2">
+                        <i class="fas fa-arrow-left me-2"></i>Tiếp tục mua sắm
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Thanh toán đơn hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkoutForm">
+                        <h6 class="mb-3">Thông tin giao hàng</h6>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="deliveryName" class="form-label">Họ tên người nhận</label>
+                                <input type="text" class="form-control" id="deliveryName" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="deliveryPhone" class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-control" id="deliveryPhone" required>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="deliveryAddress" class="form-label">Địa chỉ giao hàng</label>
+                            <textarea class="form-control" id="deliveryAddress" rows="3" required></textarea>
+                            <div class="invalid-feedback"></div>
+                        </div>
+                        
+                        <h6 class="mb-3 mt-4">Phương thức thanh toán</h6>
+                        <div class="payment-methods">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cod" value="cod" checked>
+                                <label class="form-check-label" for="cod">
+                                    <i class="fas fa-money-bill-wave me-2"></i>Thanh toán khi nhận hàng (COD)
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="bankTransfer" value="bank">
+                                <label class="form-check-label" for="bankTransfer">
+                                    <i class="fas fa-university me-2"></i>Chuyển khoản ngân hàng
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="card">
+                                <label class="form-check-label" for="creditCard">
+                                    <i class="fas fa-credit-card me-2"></i>Thẻ tín dụng/ghi nợ
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="order-summary mt-4 p-3 bg-light rounded">
+                            <h6>Tóm tắt đơn hàng</h6>
+                            <div class="d-flex justify-content-between">
+                                <span>Tổng tiền:</span>
+                                <strong id="checkoutTotal">0đ</strong>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmOrderBtn">
+                        <i class="fas fa-check me-2"></i>Xác nhận đặt hàng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty Cart State -->
+    <div class="empty-cart d-none" id="emptyCart">
+        <div class="container text-center py-5">
+            <i class="fas fa-shopping-cart empty-cart-icon"></i>
+            <h3 class="mt-4 mb-3">Giỏ hàng của bạn đang trống</h3>
+            <p class="text-muted mb-4">Hãy thêm một số sản phẩm để bắt đầu mua sắm!</p>
+            <a href="homePage.html" class="btn btn-primary btn-lg">
+                <i class="fas fa-shopping-bag me-2"></i>Bắt đầu mua sắm
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>

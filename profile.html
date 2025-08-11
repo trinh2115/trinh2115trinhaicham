@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ - Trình Là Gì shop</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="cp.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="homePage.html">
+                <i class="fas fa-shopping-bag me-2"></i>
+                Trình Là Gì shop
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="homePage.html">
+                            <i class="fas fa-home me-1"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="shopLink">
+                            <i class="fas fa-store me-1"></i>Shop
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">
+                            <i class="fas fa-phone me-1"></i>Liên hệ
+                        </a>
+                    </li>
+                </ul>
+                
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>
+                            Giỏ hàng
+                            <span class="badge bg-danger ms-1" id="cartBadge">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-1"></i>
+                            <span id="userName">Khách</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item active" href="profile.html"><i class="fas fa-user-cog me-2"></i>Hồ sơ</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-history me-2"></i>Lịch sử mua hàng</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Profile Content -->
+    <div class="container my-5">
+        <div class="row">
+            <!-- Profile Sidebar -->
+            <div class="col-lg-3">
+                <div class="profile-sidebar">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle"></i>
+                        <h5 id="profileDisplayName"></h5>
+                        <p class="text-muted" id="profileEmail"></p>
+                        <div class="d-flex flex-column align-items-center mt-3 gap-2">
+                            <button type="button" class="btn btn-outline-primary btn-sm" id="btnUploadAvatar">
+                                <i class="fas fa-upload me-1"></i>Thêm ảnh
+                            </button>
+                            <button type="button" class="btn btn-outline-danger btn-sm" id="btnRemoveAvatar">
+                                <i class="fas fa-trash-alt me-1"></i>Xóa ảnh
+                            </button>
+                            <input type="file" id="avatarInput" accept="image/*" style="display:none;">
+                        </div>
+                    </div>
+                    
+                    <nav class="profile-nav">
+                        <a href="#profile-info" class="profile-nav-link active" data-tab="profile-info">
+                            <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                        </a>
+                        <a href="#order-history" class="profile-nav-link" data-tab="order-history">
+                            <i class="fas fa-history me-2"></i>Lịch sử đơn hàng
+                        </a>
+                        <a href="#change-password" class="profile-nav-link" data-tab="change-password">
+                            <i class="fas fa-lock me-2"></i>Đổi mật khẩu
+                        </a>
+                        <a href="#account-settings" class="profile-nav-link" data-tab="account-settings">
+                            <i class="fas fa-cog me-2"></i>Cài đặt tài khoản
+                        </a>
+                    </nav>
+                </div>
+            </div>
+            
+            <!-- Profile Content -->
+            <div class="col-lg-9">
+                <!-- Profile Info Tab -->
+                <div class="tab-content active" id="profile-info">
+                    <div class="profile-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                        </h3>
+                        
+                        <form id="profileForm" novalidate>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileFirstName" class="form-label">Họ</label>
+                                    <input type="text" class="form-control" id="profileFirstName" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileLastName" class="form-label">Tên</label>
+                                    <input type="text" class="form-control" id="profileLastName" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileUsername" class="form-label">Tên đăng nhập</label>
+                                    <input type="text" class="form-control" id="profileUsername" readonly>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileEmailInput" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmailInput" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="profilePhone" class="form-label">Số điện thoại</label>
+                                    <input type="tel" class="form-control" id="profilePhone" required>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="profileBirthDate" class="form-label">Ngày sinh</label>
+                                    <input type="date" class="form-control" id="profileBirthDate">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="profileAddress" class="form-label">Địa chỉ</label>
+                                <textarea class="form-control" id="profileAddress" rows="3"></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Cập nhật thông tin
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Order History Tab -->
+                <div class="tab-content" id="order-history">
+                    <div class="profile-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-history me-2"></i>Lịch sử đơn hàng
+                        </h3>
+                        
+                        <div class="order-filters mb-4">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <select class="form-select" id="orderStatusFilter">
+                                        <option value="">Tất cả trạng thái</option>
+                                        <option value="pending">Chờ xác nhận</option>
+                                        <option value="confirmed">Đã xác nhận</option>
+                                        <option value="shipping">Đang giao hàng</option>
+                                        <option value="delivered">Đã giao hàng</option>
+                                        <option value="cancelled">Đã hủy</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="orderDateFrom" placeholder="Từ ngày">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="date" class="form-control" id="orderDateTo" placeholder="Đến ngày">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="orderHistoryContainer">
+                            <!-- Order history will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Change Password Tab -->
+                <div class="tab-content" id="change-password">
+                    <div class="profile-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-lock me-2"></i>Đổi mật khẩu
+                        </h3>
+                        
+                        <form id="changePasswordForm" novalidate>
+                            <div class="mb-3">
+                                <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="currentPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleCurrentPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="newPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleNewPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback"></div>
+                                <div class="form-text">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số.</div>
+                                <div class="password-strength"></div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="confirmNewPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                                <div class="input-group">
+                                    <input type="password" class="form-control" id="confirmNewPassword" required>
+                                    <button class="btn btn-outline-secondary" type="button" id="toggleConfirmNewPassword">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <div class="invalid-feedback"></div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Account Settings Tab -->
+                <div class="tab-content" id="account-settings">
+                    <div class="profile-content">
+                        <h3 class="mb-4">
+                            <i class="fas fa-cog me-2"></i>Cài đặt tài khoản
+                        </h3>
+                        
+                        <div class="settings-section">
+                            <h5>Thông báo</h5>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="emailNotifications" checked>
+                                <label class="form-check-label" for="emailNotifications">
+                                    Nhận thông báo qua email
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="smsNotifications">
+                                <label class="form-check-label" for="smsNotifications">
+                                    Nhận thông báo qua SMS
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-4">
+                                <input class="form-check-input" type="checkbox" id="promotionNotifications" checked>
+                                <label class="form-check-label" for="promotionNotifications">
+                                    Nhận thông báo khuyến mãi
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h5>Bảo mật</h5>
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox" id="twoFactorAuth">
+                                <label class="form-check-label" for="twoFactorAuth">
+                                    Xác thực hai bước
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-4">
+                                <input class="form-check-input" type="checkbox" id="loginNotifications" checked>
+                                <label class="form-check-label" for="loginNotifications">
+                                    Thông báo khi đăng nhập
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="settings-section">
+                            <h5 class="text-danger">Vùng nguy hiểm</h5>
+                            <p class="text-muted">Các hành động này không thể hoàn tác</p>
+                            <button class="btn btn-outline-danger" id="deactivateAccountBtn">
+                                <i class="fas fa-user-slash me-2"></i>Vô hiệu hóa tài khoản
+                            </button>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="saveSettingsBtn">
+                            <i class="fas fa-save me-2"></i>Lưu cài đặt
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deactivate Account Modal -->
+    <div class="modal fade" id="deactivateModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-danger">Vô hiệu hóa tài khoản</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <strong>Cảnh báo!</strong> Hành động này không thể hoàn tác.
+                    </div>
+                    <p>Bạn có chắc chắn muốn vô hiệu hóa tài khoản? Tất cả dữ liệu của bạn sẽ bị xóa vĩnh viễn.</p>
+                    <div class="mb-3">
+                        <label for="confirmDeactivate" class="form-label">
+                            Nhập "XÁC NHẬN" để tiếp tục:
+                        </label>
+                        <input type="text" class="form-control" id="confirmDeactivate" placeholder="XÁC NHẬN">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeactivateBtn" disabled>
+                        Vô hiệu hóa tài khoản
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="profile.js"></script>
+</body>
+</html>
