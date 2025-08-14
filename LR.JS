@@ -125,6 +125,9 @@ const handleLogin = () => {
             } else if (username.length < 3) {
                 showValidationError('username', 'Tên đăng nhập phải có ít nhất 3 ký tự');
                 isValid = false;
+            } else if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+                showValidationError('username', 'Tên đăng nhập chỉ được chứa chữ, số và dấu gạch dưới');
+                isValid = false;
             } else {
                 showValidationSuccess('username');
             }
