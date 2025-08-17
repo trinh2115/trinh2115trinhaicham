@@ -1,4 +1,4 @@
-// LR.js: (LR->login, register) - JavaScript for Login and Register functionality
+// LR.js: (LR->login, register) 
 
 // Utility functions
 const showAlert = (title, message, type = 'info') => {
