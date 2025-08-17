@@ -215,22 +215,6 @@ body {
     margin-bottom: 1.5rem;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-
-    .hero-btn {
-        font-size: 0.95rem;
-        padding: 0.6rem 1.2rem;
-    }
-}
-
 /* Categories Section */
 .category-card {
     background: white;
@@ -421,24 +405,103 @@ footer {
 }
 
 @media (max-width: 576px) {
-    .hero-title {
-        font-size: 2rem;
+    body {
+        padding-top: 56px;
     }
-    
-    .category-card {
-        padding: 1rem;
+    .navbar {
+        min-height: 48px;
+        height: 48px;
+        padding: 0 0.5rem;
     }
-    
-    .category-icon {
-        font-size: 2rem;
+    .navbar .container {
+        height: 48px;
+        padding: 0;
     }
-    
-    .product-image {
-        height: 180px;
-    }
-    
     .navbar-brand {
+        font-size: 1rem;
+        margin-right: 1rem;
+        line-height: 48px;
+        height: 48px;
+    }
+    .navbar-nav.menu-center {
+        gap: 1rem;
+    }
+    .navbar-nav.menu-right {
+        gap: 0.5rem;
+    }
+    .nav-link, .navbar-nav .nav-link {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+        line-height: 48px;
+        height: 48px;
+    }
+    .hero-section, .hero-slide {
+        min-height: 180px;
+        max-height: 180px;
+    }
+    .category-card {
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    .category-icon {
+        font-size: 1.5rem;
+    }
+    .product-image {
+        height: 120px;
+    }
+    .product-info {
+        padding: 0.5rem;
+    }
+    .product-title {
+        font-size: 1rem;
+    }
+    .product-price {
+        font-size: 1rem;
+    }
+    .product-actions {
+        gap: 0.25rem;
+        flex-direction: column;
+    }
+    .btn, .btn-sm {
+        font-size: 0.95rem;
+        padding: 0.5rem 1rem;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+    .footer {
+        padding: 1rem 0;
+        font-size: 0.95rem;
+    }
+    .social-links a {
         font-size: 1.2rem;
+    }
+    .back-to-top {
+        bottom: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 400px) {
+    .navbar-brand {
+        font-size: 0.9rem;
+    }
+    .category-card {
+        padding: 0.5rem;
+    }
+    .product-image {
+        height: 90px;
+    }
+    .product-title {
+        font-size: 0.9rem;
+    }
+    .product-price {
+        font-size: 0.9rem;
+    }
+    .btn, .btn-sm {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.7rem;
     }
 }
 
