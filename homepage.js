@@ -415,15 +415,29 @@ const handleLogout = () => {
 const loadUserInfo = () => {
     try {
         currentUser = getFromStorage('currentUser');
-        const userName = document.getElementById('userName');
-        if (currentUser && userName) {
-            userName.textContent = currentUser.firstName || currentUser.username;
-        } else if (userName) {
-            userName.textContent = 'Khách';
+        const userNav = document.getElementById('userNav');
+        if (!userNav) return;
+        if (currentUser) {
+            userNav.innerHTML = `
+                <div class="dropdown">
+                    <button class="btn btn-outline-primary btn-sm dropdown-toggle d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user me-1"></i>
+                        <span>${currentUser.firstName || currentUser.username}</span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                        <li><a class="dropdown-item" href="order-history.html"><i class="fas fa-history me-2"></i>Lịch sử mua hàng</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+            `;
+        } else {
+            userNav.innerHTML = '<a href="login.html" class="btn btn-outline-primary btn-sm"><i class="fas fa-user me-1"></i> Đăng nhập</a>';
         }
+        handleLogout(); // Đảm bảo nút Đăng xuất luôn có sự kiện
     } catch (error) {
         console.error('Load user info error:', error);
-        // Không redirect khi không đăng nhập
     }
 };
 

@@ -175,7 +175,7 @@ const handleLogin = () => {
                 
                 // Redirect after delay
                 setTimeout(() => {
-                    window.location.href = 'homePage.html';
+                    window.location.href = 'index.html';
                 }, 1500);
             } else {
                 showAlert('Lỗi', 'Tên đăng nhập hoặc mật khẩu không đúng!', 'danger');

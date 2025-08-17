@@ -82,7 +82,7 @@ const loadUserInfo = () => {
         }
     } catch (error) {
         console.error('Load user info error:', error);
-        // Không redirect khi không đăng nhập
+        
     }
 };
 
